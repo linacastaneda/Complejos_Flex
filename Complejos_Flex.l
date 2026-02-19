@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+FILE *yyin;
 %}
 
 /* Definiciones */
@@ -15,11 +16,10 @@ IMAG        [iIjJ]
 
 %%
 
-\n      { /* igno salto de linea */ }
-
-^[ \t]*{NUM}[ \t]*[+-][ \t]*{NUM}{IMAG}[ \t]*$   { printf("ACEPTA\n"); }
-
-^.*$   { printf("NO ACEPTA\n"); }
+[ \t]*{SIGNO}?{IMAG}[ \t]*\n          { printf("ACEPTA\n"); }
+[ \t]*{NUM}[ \t]*[+-][ \t]*{IMAG}[ \t]*\n     { printf("ACEPTA\n"); }
+[ \t]*{NUM}[ \t]*[+-][ \t]*{NUM}{IMAG}[ \t]*\n { printf("ACEPTA\n"); }
+.*\n                                   { printf("NO ACEPTA\n"); }
 
 %%
 
